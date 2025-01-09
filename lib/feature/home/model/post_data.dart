@@ -4,8 +4,6 @@ import 'product_model.dart';
 
 class ProductData {
   Dio dio = Dio();
-
-
   Future<List<ProductModel>> getProducts({required String endPoint}) async {
     try {
       var response = await dio.get(

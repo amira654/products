@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../cubit/cubit/product_cubit.dart';
 import '../../cubit/cubit/product_state.dart';
 import '../../model/post_data.dart';
-import 'product_details.dart';
+import '../widget/custom_appBar.dart';
+import '../widget/product_item.dart';
 import 'start_screen.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -20,32 +22,17 @@ class CategoryScreen extends StatelessWidget {
       child: BlocConsumer<ProductCubit, ProductState>(
         listener: (context, state) {
           if (state is ProductError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Error: ${state.message}'),
-                backgroundColor: Colors.red,
-              ),
-            );
+            showSnackBar(context, 'Error: ${state.message}', Colors.red);
           } else if (state is ProductSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Data loaded successfully!'),
-                backgroundColor: Colors.teal,
-              ),
-            );
+            showSnackBar(context, 'Data loaded successfully!', Colors.teal);
           }
         },
         builder: (context, state) {
           if (state is ProductSuccess) {
             return Scaffold(
-              appBar: AppBar(
-                  title: Text(
-                    title,
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                  centerTitle: true,
-                  elevation: 5,
-                  backgroundColor: Colors.teal),
+              appBar: customAppBar(
+                title: title,
+              ),
               drawer: const Drawer(
                 child: StartScreen(),
               ),
@@ -54,117 +41,8 @@ class CategoryScreen extends StatelessWidget {
                 itemCount: state.model.length,
                 itemBuilder: (context, index) {
                   final product = state.model[index];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ProductDetailScreen(product: product),
-                        ),
-                      );
-                    },
-                    child: Card(
-                      elevation: 8,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      margin: const EdgeInsets.symmetric(vertical: 12.0),
-                      color: Colors.white,
-                      child: Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CircleAvatar(
-                                radius: 50,
-                                backgroundImage: NetworkImage(product.image,),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      product.category,
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.teal,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Text('price:            '),
-                                        Text(
-                                          '\$${product.price}',
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                            color: Colors.teal,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 8),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              children: [
-                                Text(
-                                  product.title,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  product.description,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey,
-                                  ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                const SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    const Icon(Icons.star,
-                                        color: Colors.amber, size: 16),
-                                    Text(
-                                      product.rating.rate.toString(),
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 4),
-                                    Text(
-                                      '(${product.rating.count} reviews)',
-                                      style: const TextStyle(
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  return ProductItem(
+                    product: product,
                   );
                 },
               ),
@@ -183,9 +61,17 @@ class CategoryScreen extends StatelessWidget {
               ),
             );
           } else {
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
+            return Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color.fromARGB(255, 178, 201, 221), Colors.teal],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              child: const SpinKitCircle(
+                color: Color.fromARGB(255, 179, 178, 178),
+                size: 100.0,
               ),
             );
           }
@@ -193,4 +79,13 @@ class CategoryScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+void showSnackBar(BuildContext context, String message, Color color) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+      backgroundColor: color,
+    ),
+  );
 }
