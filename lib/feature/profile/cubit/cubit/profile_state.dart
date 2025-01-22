@@ -1,11 +1,13 @@
 
+import '../../model/profile_model.dart';
 
-import 'package:flutter_application_2/feature/profile/model/profile_model.dart';
+sealed class UserProfileState {}
 
-class ProfileCubitStatue {}
-class InitialProfileCubit extends ProfileCubitStatue {}
-class SucessProfileCubit extends ProfileCubitStatue {
-  final User profileModelUserData ;
-  SucessProfileCubit({required this.profileModelUserData});
+final class UserProfileInitial extends UserProfileState {}
+
+final class UserSuccessState extends UserProfileState {
+  final UserProfileModelData userData;
+  UserSuccessState({required this.userData});
 }
-class LoadingProfileCubit extends ProfileCubitStatue {}
+
+final class UserLoadingState extends UserProfileState {}

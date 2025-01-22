@@ -1,32 +1,39 @@
-class User {
-  final ProfileModel profileModel;
-
-  User({required this.profileModel});
-  factory User.fromJson(Map<String, dynamic> jsonData) {
-    return User(profileModel: ProfileModel.fromJson(jsonData['user']));
-  }
-}
-
-class ProfileModel {
+class UserProfileModel {
   final String nationalId;
   final String name;
+
   final String phone;
   final String email;
   final String profileImage;
 
-  ProfileModel(
-      {required this.nationalId,
+  UserProfileModel(
+      {required this.email,
       required this.name,
+      required this.nationalId,
       required this.phone,
-      required this.email,
       required this.profileImage});
 
-  factory ProfileModel.fromJson(Map<String, dynamic> json) {
-    return ProfileModel(
-        nationalId: json['nationalId'],
-        name: json['name'],
-        phone: json['phone'],
-        email: json['email'],
-        profileImage: json['profileImage']);
+  factory UserProfileModel.fromJson(Map<String, dynamic> json) {
+    return UserProfileModel(
+      name: json["name"],
+      email: json["email"],
+      phone: json["phone"],
+      nationalId: json["nationalId"],
+      profileImage: json["profileImage"],
+    );
+  }
+}
+
+class UserProfileModelData {
+  final UserProfileModel userProfileModel;
+
+  UserProfileModelData({required this.userProfileModel});
+
+  factory UserProfileModelData.fromJson(Map<String, dynamic> json) {
+    return UserProfileModelData(
+      userProfileModel: UserProfileModel.fromJson(
+        json["user"],
+      ),
+    );
   }
 }

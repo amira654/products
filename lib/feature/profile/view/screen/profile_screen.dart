@@ -13,7 +13,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProfileCubit()..prfileDataCubit(),
+      create: (context) => UserProfileCubit()..getUserProfileDataCubit(),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blue,
@@ -26,41 +26,41 @@ class ProfileScreen extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: BlocConsumer<ProfileCubit, ProfileCubitStatue>(
+          child: BlocConsumer<UserProfileCubit,UserProfileState >(
             listener: (context, state) {},
             builder: (context, state) {
-              if (state is SucessProfileCubit) {
+              if (state is UserSuccessState) {
                 return Column(
                   children: [
                     CircleAvatar(
                       radius: 80,
                       backgroundImage: NetworkImage(
-                          state.profileModelUserData.profileModel.profileImage),
+                          state.userData.userProfileModel.profileImage),
                     ),
                     const SizedBox(height: 40),
                     CardProfileWidget(
-                      text: state.profileModelUserData.profileModel.name,
+                      text: state.userData.userProfileModel.name,
                       icon: Icons.person,
                     ),
                     const SizedBox(height: 20),
                     CardProfileWidget(
-                      text: state.profileModelUserData.profileModel.email,
+                      text:  state.userData.userProfileModel.email,
                       icon: Icons.email,
                     ),
                     const SizedBox(height: 20),
                     CardProfileWidget(
-                      text: state.profileModelUserData.profileModel.phone,
+                      text:  state.userData.userProfileModel.phone,
                       icon: Icons.call,
                     ),
                     const SizedBox(height: 20),
                     CardProfileWidget(
-                      text: state.profileModelUserData.profileModel.nationalId,
+                      text:  state.userData.userProfileModel.nationalId,
                       icon: Icons.card_travel,
                     ),
                     const SizedBox(height: 20),
                   ],
                 );
-              } else if (state is LoadingProfileCubit) {
+              } else if (state is UserLoadingState) {
                 return const CircularProgressIndicator();
               } else {
                 return const Text('error');

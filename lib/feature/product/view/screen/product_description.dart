@@ -95,7 +95,7 @@ class ProductDescription extends StatelessWidget {
                 color: Colors.blueAccent,
                 textColor: Colors.white,
                 child: const Row(
-                 
+                  
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(

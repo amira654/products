@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/feature/cart/cubit/cubit/cart_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'feature/auth/view/screen/login_screen.dart';
@@ -15,9 +17,12 @@ class MyApp extends StatelessWidget {
         designSize: const Size(360, 690),
         minTextAdapt: true,
         builder: (_, child) {
-          return  MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: ProductsScreen(),
+          return BlocProvider(
+            create: (context) => CartCubit(),
+            child:  MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: LoginScreen(),
+            ),
           );
         });
   }

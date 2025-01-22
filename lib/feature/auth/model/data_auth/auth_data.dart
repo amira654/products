@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthData {
   final Dio dio = Dio();
@@ -49,15 +50,26 @@ class AuthData {
 
     try {
       var data = response.data;
+      var newToken = data["user"]["token"];
+      print(newToken);
+
       print(response.statusCode);
       print(data['message']);
+     await CashToken.shared!.setString("token", newToken);
       return data;
     } on DioException catch (error) {
       if (error.response != null) {
         print(error.response!.data['message']);
 
-         return error.response!.data;
+        return error.response!.data;
       }
     }
+  }
+}
+
+class CashToken {
+  static SharedPreferences? shared;
+  static init() async {
+    shared = await SharedPreferences.getInstance();
   }
 }

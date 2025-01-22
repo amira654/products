@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../product/view/screen/product_screen.dart';
 import '../widget/card_widget.dart';
 
 class StartScreen extends StatelessWidget {
@@ -25,8 +26,8 @@ class StartScreen extends StatelessWidget {
           SizedBox(height: 50),
           CardWidget(endpoint: "men's%20clothing", icon: '👔', text: "Men'sClothing"),
           SizedBox(height: 50),
-          CardWidget(endpoint: "women's%20clothing", icon: '👜',text: "Women'sClothing")
-        ],
+          CardWidget(endpoint: "women's%20clothing", icon: '👜',text: "Women'sClothing"),
+             ],
       ),
     );
   }

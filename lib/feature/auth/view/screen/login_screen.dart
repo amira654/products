@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/feature/product/view/screen/product_screen.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -112,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const StartScreen(),
+                                builder: (context) => const ProductsScreen(),
                               ),
                             );
                           },
