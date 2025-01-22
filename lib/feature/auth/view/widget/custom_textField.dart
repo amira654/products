@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'border_textfield.dart';
 
@@ -36,7 +37,6 @@ class CustomTextField extends StatelessWidget {
           prefixIcon: Icon(prefix),
           suffixIcon: suffix,
           border: border(radius: 10, color: Colors.blue),
-          // enabledBorder: border(color: Colors.red, radius: 20),
           focusedBorder: border(color: Colors.blue, radius: 15),
           prefixIconColor: Colors.blue,
           suffixIconColor: Colors.blue),
@@ -44,5 +44,9 @@ class CustomTextField extends StatelessWidget {
   }
 }
 
-
-
+class CashToken {
+  static SharedPreferences? shared;
+  static init() async {
+    shared = await SharedPreferences.getInstance();
+  }
+}

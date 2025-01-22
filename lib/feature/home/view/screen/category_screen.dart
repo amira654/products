@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/feature/profile/view/screen/profile_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -34,7 +35,7 @@ class CategoryScreen extends StatelessWidget {
                 title: title,
               ),
               drawer: const Drawer(
-                child: StartScreen(),
+                child: ProfileScreen(),
               ),
               body: ListView.builder(
                 padding: const EdgeInsets.all(8.0),

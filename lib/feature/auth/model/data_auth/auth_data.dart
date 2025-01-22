@@ -1,9 +1,32 @@
 import 'package:dio/dio.dart';
 
 class AuthData {
-   final Dio dio = Dio();
+  final Dio dio = Dio();
+  loginData({
+    required email,
+    required password,
+  }) async {
+    var response =
+        await dio.post('https://elwekala.onrender.com/user/login', data: {
+      "email": email,
+      "password": password,
+    });
 
-    postData(
+    try {
+      var data = response.data;
+      print(response.statusCode);
+      print(data['message']);
+      return data;
+    } on DioException catch (error) {
+      if (error.response != null) {
+        print(error.response!.data['message']);
+
+        return error.response!.data;
+      }
+    }
+  }
+
+  postData(
       {required name,
       required email,
       required phone,
@@ -32,7 +55,8 @@ class AuthData {
     } on DioException catch (error) {
       if (error.response != null) {
         print(error.response!.data['message']);
-        return error.response!.data['message'];
+
+         return error.response!.data;
       }
     }
   }
