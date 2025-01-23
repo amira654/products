@@ -25,7 +25,6 @@ class FavCubit extends Cubit<FavState> {
  deleteFavCubit({required String productId}){
     emit(FavLoading());
     favData.deleteFav(productId: productId);
-    emit(FavDelete());
     getAllFav();
   }
 

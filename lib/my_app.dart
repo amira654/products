@@ -28,9 +28,9 @@ class MyApp extends StatelessWidget {
                 create: (context) => FavCubit(),
               ),
             ],
-            child: MaterialApp(
+            child: const MaterialApp(
               debugShowCheckedModeBanner: false,
-              home: LoginScreen(),
+              home: SplashScreen(),
             ),
           );
         });

@@ -34,8 +34,8 @@ class CategoryScreen extends StatelessWidget {
               appBar: customAppBar(
                 title: title,
               ),
-              drawer: const Drawer(
-                child: ProfileScreen(),
+              endDrawer: const Drawer(
+                child: StartScreen(),
               ),
               body: ListView.builder(
                 padding: const EdgeInsets.all(8.0),

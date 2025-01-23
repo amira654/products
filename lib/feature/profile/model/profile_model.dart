@@ -1,17 +1,18 @@
+
 class UserProfileModel {
   final String nationalId;
   final String name;
-
   final String phone;
   final String email;
   final String profileImage;
 
-  UserProfileModel(
-      {required this.email,
-      required this.name,
-      required this.nationalId,
-      required this.phone,
-      required this.profileImage});
+  UserProfileModel({
+    required this.email,
+    required this.name,
+    required this.nationalId,
+    required this.phone,
+    required this.profileImage,
+  });
 
   factory UserProfileModel.fromJson(Map<String, dynamic> json) {
     return UserProfileModel(
@@ -31,9 +32,7 @@ class UserProfileModelData {
 
   factory UserProfileModelData.fromJson(Map<String, dynamic> json) {
     return UserProfileModelData(
-      userProfileModel: UserProfileModel.fromJson(
-        json["user"],
-      ),
+      userProfileModel: UserProfileModel.fromJson(json["user"]),
     );
   }
 }

@@ -13,5 +13,9 @@ final class FavGetSuccess extends FavState {
 
   FavGetSuccess({required this.listFav });
 }
+final class FavErrorState extends FavState {
+  String errorMessage;
+  FavErrorState({required this.errorMessage});
 
+}
 final class FavDelete extends FavState {}

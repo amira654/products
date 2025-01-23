@@ -52,7 +52,7 @@ postLoginCubit({
   String? userImage;
 
   Future<void> addImage() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       image = File(pickedFile.path);
       Uint8List bytes = File(image!.path).readAsBytesSync();

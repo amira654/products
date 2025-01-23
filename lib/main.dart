@@ -16,6 +16,9 @@ void main() {
   CashToken.init();
   CacheShared.init();
   runApp(
-    DevicePreview(enabled: true, builder: (context) => const MyApp()),
+    DevicePreview(
+      enabled: true,
+      builder: (context) => const MyApp(),
+    ),
   );
 }

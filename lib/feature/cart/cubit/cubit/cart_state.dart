@@ -13,5 +13,10 @@ final class CartGetAllSuccess extends CartState {
   List <CartModel> listCart;
   CartGetAllSuccess({required this.listCart});
 }
+final class CartErrorState extends CartState {
+  String errorMessage;
+  CartErrorState({required this.errorMessage});
+
+}
 
 final class CartDelete extends CartState {}

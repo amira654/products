@@ -113,14 +113,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const ProductsScreen(),
+                                builder: (context) => const StartScreen(),
                               ),
                             );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue,
                           ),
-                          child: const Text("Login"),
+                          child: const Text("Login",style: TextStyle(color: Colors.white),),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

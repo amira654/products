@@ -1,15 +1,21 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../model/post_data.dart';
+import '../../model/profile_model.dart';
 import 'profile_state.dart';
 
 class UserProfileCubit extends Cubit<UserProfileState> {
   UserProfileCubit() : super(UserProfileInitial());
-  UserProfileService userProfileService = UserProfileService();
 
-  getUserProfileDataCubit() async {
+  final UserProfileService userProfileService = UserProfileService();
+
+  Future<void> getUserProfileDataCubit() async {
     emit(UserLoadingState());
-    var success = await userProfileService.getUserProfileData();
-    emit(UserSuccessState(userData: success));
+    try {
+      var success = await userProfileService.getUserProfileData();
+      emit(UserSuccessState(userData: success));
+    } catch (e) {
+      emit(UserErrorState(errorMessage: 'Failed to load profile data.'));
+    }
   }
 }

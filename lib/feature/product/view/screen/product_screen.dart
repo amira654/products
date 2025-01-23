@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/feature/home/view/screen/start_screen.dart';
 import 'package:flutter_application_2/feature/product/cubit/cubit/product_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../../cart/view/screen/cart_screen.dart';
 import '../../../fav/view/fav_screen.dart';
@@ -17,11 +19,13 @@ class ProductsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Products"),
+          title: const Text("Products", style: TextStyle(color: Colors.white)),
+          centerTitle: true,
+          elevation: 5,
+          backgroundColor: Colors.teal),
+      endDrawer: const Drawer(
+        child: StartScreen(),
       ),
-      drawer: const Drawer(
-            child: ProfileScreen(),
-          ),
       body: BlocProvider(
         create: (context) => ProductCubit()..getProductDataCubit(),
         child: BlocBuilder<ProductCubit, ProductState>(
@@ -56,7 +60,19 @@ class ProductsScreen extends StatelessWidget {
                 ),
               );
             } else if (state is ProductLoadingState) {
-              return const Center(child: CircularProgressIndicator());
+              return Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color.fromARGB(255, 178, 201, 221), Colors.teal],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: const SpinKitCircle(
+                  color: Color.fromARGB(255, 179, 178, 178),
+                  size: 100.0,
+                ),
+              );
             } else {
               return const Text("something went wrong");
             }
