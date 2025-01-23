@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'feature/auth/view/screen/login_screen.dart';
+import 'feature/fav/view/fav_screen.dart';
 import 'feature/product/view/screen/product_screen.dart';
 import 'feature/profile/view/screen/profile_screen.dart';
 import 'feature/splash_screen/splash_screen.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
-              home: ProductsScreen(),
+              home: LoginScreen(),
             ),
           );
         });

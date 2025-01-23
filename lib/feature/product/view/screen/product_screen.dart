@@ -3,6 +3,7 @@ import 'package:flutter_application_2/feature/product/cubit/cubit/product_cubit.
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../cart/view/screen/cart_screen.dart';
+import '../../../fav/view/fav_screen.dart';
 import '../../../profile/view/screen/profile_screen.dart';
 import '../../cubit/cubit/product_state.dart';
 import '../widget/product_succes_widget.dart';
@@ -19,7 +20,7 @@ class ProductsScreen extends StatelessWidget {
         title: const Text("Products"),
       ),
       drawer: const Drawer(
-          //  child: ProfileScreen(),
+            child: ProfileScreen(),
           ),
       body: BlocProvider(
         create: (context) => ProductCubit()..getProductDataCubit(),
@@ -62,14 +63,34 @@ class ProductsScreen extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => CartScreen(),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+              child: const Icon(Icons.shopping_cart),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CartScreen(),
+                  ),
+                );
+              }),
+          const SizedBox(
+            height: 20,
           ),
-        );
-      }),
+          FloatingActionButton(
+              child: const Icon(Icons.favorite_border),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FavScreen(),
+                  ),
+                );
+              })
+        ],
+      ),
     );
   }
 }

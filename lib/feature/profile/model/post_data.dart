@@ -10,7 +10,7 @@ class UserProfileService {
     final Dio dio = Dio();
     var response = await dio.post(
       'https://elwekala.onrender.com/user/profile',
-      data: {"token": getToken},
+      data: {"token": "b6cipljpfykm69a7odl"},
     );
 
     try {

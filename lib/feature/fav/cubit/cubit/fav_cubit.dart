@@ -14,4 +14,19 @@ class FavCubit extends Cubit<FavState> {
     favData.addFav(productId: productId);
     emit(FavSuccess());
   }
+
+
+  getAllFav() async{
+    emit(FavLoading());
+   var success =await  favData.getAllFav();
+    emit(FavGetSuccess(listFav: success));
+  }
+  
+ deleteFavCubit({required String productId}){
+    emit(FavLoading());
+    favData.deleteFav(productId: productId);
+    emit(FavDelete());
+    getAllFav();
+  }
+
 }
