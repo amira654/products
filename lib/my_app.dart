@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/feature/cart/cubit/cubit/cart_cubit.dart';
+import 'package:flutter_application_2/feature/fav/cubit/cubit/fav_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,11 +18,18 @@ class MyApp extends StatelessWidget {
         designSize: const Size(360, 690),
         minTextAdapt: true,
         builder: (_, child) {
-          return BlocProvider(
-            create: (context) => CartCubit(),
-            child:  MaterialApp(
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => CartCubit(),
+              ),
+              BlocProvider(
+                create: (context) => FavCubit(),
+              ),
+            ],
+            child: MaterialApp(
               debugShowCheckedModeBanner: false,
-              home: LoginScreen(),
+              home: ProductsScreen(),
             ),
           );
         });

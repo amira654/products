@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../cart/cubit/cubit/cart_cubit.dart';
+import '../../../fav/cubit/cubit/fav_cubit.dart';
 import '../../model/product_model.dart';
 
 class ProductSuccessWidget extends StatelessWidget {
@@ -35,35 +36,37 @@ class ProductSuccessWidget extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                
                   children: [
-                    Row(
-                      children: [
-                        const Text(
-                          "price",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Text(
-                          productsModel.productPrice.toString(),
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ],
+                    const Text(
+                      "price",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                    Text(
+                      productsModel.productPrice.toString(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: Colors.blue,
+                      ),
                     ),
                   ],
                 ),
-                const Spacer(
-                  flex: 1,
-                ),
+              ],
+            ),
+            // const Spacer(
+            //   flex: 1,
+            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
                 IconButton(
                   onPressed: () {
                     CartCubit.get(context).getAddToCartCubit();
@@ -72,6 +75,14 @@ class ProductSuccessWidget extends StatelessWidget {
                     Icons.shopping_bag_outlined,
                   ),
                 ),
+                IconButton(
+                  onPressed: () {
+                    FavCubit.get(context).addFavCubit(productId: productsModel.productId);
+                  },
+                  icon: const Icon(
+                    Icons.favorite_border,
+                  ),
+                )
               ],
             )
           ],

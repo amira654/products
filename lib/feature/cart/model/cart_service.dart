@@ -32,7 +32,7 @@ class CartService {
       if (response.statusCode==200){
         List dataRepo=response.data["products"];
         List<CartModel> listcart=dataRepo.map((e)=>CartModel.fromJson(e)).toList();
-        print(listcart[2].image);
+     //   print(listcart[2].image);
         return listcart;
         
       }
